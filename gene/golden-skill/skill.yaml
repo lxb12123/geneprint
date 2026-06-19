@@ -2,6 +2,7 @@
 name: review
 description: 对当前改动做代码审查(确定性取 diff + LLM 评审)
 when-to-use: 提交或合并前,需要审查代码改动的正确性与质量时
+version: "0.1.0"
 # 自描述原语(基因⑤):声明用到的能力 → 编译进 .claude SKILL.md 的 allowed-tools 与 AGENTS.md 依赖
 uses:
   mcp: []
