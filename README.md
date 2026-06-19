@@ -39,7 +39,7 @@ Today's AI coding agents build fast but inconsistently — ad-hoc structure, thr
    │
    ├─ scaffold a blank gene-conforming skill → agent fills it in
    ├─ install it (fingerprint-idempotent) + update the manifest (.gene/gene.yaml)
-   └─ recompile AGENTS.md
+   └─ recompile host outputs (AGENTS.md + .claude/skills + .cursor/rules)
 ```
 
 Same inputs → identical tree. Re-runs never mutate existing files (guaranteed by a content-fingerprint + manifest check).
@@ -65,7 +65,7 @@ goal met + gene-compliant the whole way = a good product
 | # | Gene | Lands as |
 |---|------|----------|
 | ① | Deterministic + semantic split | `scripts/` (deterministic) ⟂ `prompt.md` (LLM) |
-| ② | Multi-host compile + open standard | one source → `AGENTS.md` (+ host-specific later) |
+| ② | Multi-host compile + open standard | one source → `AGENTS.md` + `.claude/skills` + `.cursor/rules` |
 | ③ | Three-tier lazy loading | metadata → body → `reference/` on demand |
 | ④ | Committable artifacts | config `GENE.md` ⟂ memory `MEMORY.md` |
 | ⑤ | Self-describing primitives | `skill.yaml` declares the `mcp` / permissions / subagents it uses |
@@ -90,7 +90,9 @@ goal met + gene-compliant the whole way = a good product
 │   ├── prompt.md        #   LLM semantic layer
 │   ├── scripts/         #   deterministic layer (0 tokens)
 │   └── reference/       #   load-on-demand knowledge
-├── AGENTS.md            # compiled output: open cross-host standard
+├── AGENTS.md            # compiled: open standard (read by Cursor / Copilot / Gemini)
+├── .claude/skills/<name>/SKILL.md   # compiled: Claude Code native (Claude ignores AGENTS.md)
+├── .cursor/rules/<name>.mdc         # compiled: Cursor native
 └── GENE.md              # committable config / architecture decisions
 ```
 
@@ -116,15 +118,16 @@ geneprint/
 │   ├── manifest.mjs              #   .gene/gene.yaml read/write
 │   ├── foundation.mjs            #   idempotent foundation stamping
 │   ├── skill-install.mjs         #   fingerprint-idempotent install
-│   ├── compiler.mjs              #   skills/ → AGENTS.md
+│   ├── compiler.mjs              #   skills/ → AGENTS.md + .claude/skills + .cursor/rules
 │   ├── scaffold.mjs              #   blank gene-conforming skill skeleton
 │   └── cli.mjs                   #   inherit + scaffold orchestration + CLI
-├── test/                         # 29 tests (node:test)
+├── test/                         # 35 tests (node:test)
 │   ├── fingerprint.test.mjs
 │   ├── manifest.test.mjs
 │   ├── foundation.test.mjs
 │   ├── skill-install.test.mjs
 │   ├── compiler.test.mjs
+│   ├── compiler-hosts.test.mjs
 │   ├── cli.test.mjs
 │   ├── collect-diff.test.mjs
 │   ├── scaffold.test.mjs
@@ -165,7 +168,7 @@ Requirements: **Node ≥ 18** and **git**.
 
 ```bash
 git clone https://github.com/lxb12123/geneprint && cd geneprint
-npm test          # 29/29 should pass
+npm test          # 35/35 should pass
 
 # Scaffold a blank conforming skill, fill it, then imprint into any project:
 node lib/cli.mjs scaffold /tmp/my-skill --name my-skill
@@ -183,13 +186,13 @@ The bundled golden skill **`/review`** demonstrates all five genes: a determinis
 
 ## Status & roadmap
 
-**Done & tested.** Idempotent `/inherit` engine, `scaffold` skeleton generator, the golden `/review` skill, `AGENTS.md` compilation, installable as a Claude Code plugin — **29 passing tests**.
+**Done & tested.** Idempotent `/inherit` engine, `scaffold` skeleton generator, the golden `/review` skill, host-native compilation (Claude `.claude/skills`, Cursor `.cursor/rules`, others via `AGENTS.md`), installable as a Claude Code plugin — **35 passing tests**.
 
 | Phase | Adds | Status |
 |-------|------|--------|
 | **A** | golden skill + foundation + idempotency core | ✅ |
 | **B** | `/inherit` flow (interview → scaffold → fill → imprint) | ✅ |
-| **C** | installable plugin (`.claude-plugin/` + self-marketplace) | ✅ · host-specific compile pending |
+| **C** | installable plugin (`.claude-plugin/` + self-marketplace) + host-native compile (Claude / Cursor / AGENTS.md) | ✅ |
 | **D** | other primitives (mcp probes, subagents, hooks, permissions) + engineering layer (eval, observability, versioning, registry) | planned |
 
 Design docs live in [`docs/superpowers/specs/`](docs/superpowers/specs/) and [`docs/superpowers/plans/`](docs/superpowers/plans/).
