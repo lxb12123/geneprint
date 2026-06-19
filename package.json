@@ -1,10 +1,10 @@
 {
-  "name": "meta-harness",
+  "name": "geneprint",
   "version": "0.1.0",
   "description": "Agent 原生基因插件:一条幂等命令把好架构基因刻进任意项目",
   "type": "module",
   "license": "MIT",
-  "bin": { "meta-harness": "lib/cli.mjs" },
+  "bin": { "geneprint": "lib/cli.mjs" },
   "scripts": {
     "test": "node --test"
   },

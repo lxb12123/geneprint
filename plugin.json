@@ -1,5 +1,5 @@
 {
-  "name": "meta-harness",
+  "name": "geneprint",
   "version": "0.1.0",
   "description": "把好架构基因刻进任意项目;一句话长出基因合规技能",
   "commands": ["commands/inherit.md"]
