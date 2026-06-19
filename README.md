@@ -106,6 +106,7 @@ geneprint/
 ├── .claude-plugin/
 │   ├── plugin.json               # Claude Code plugin manifest
 │   └── marketplace.json          # self-marketplace (installable from this repo)
+├── .mcp.json                     # declares the geneprint-diagnostics MCP server
 ├── commands/
 │   ├── inherit.md                # /inherit — grow a gene-conforming skill
 │   ├── eval.md                   # /eval — grade a skill against its eval cases
@@ -128,11 +129,14 @@ geneprint/
 │   ├── scaffold.mjs              #   blank gene-conforming skill skeleton
 │   ├── eval.mjs                  #   load / grade / summarize eval cases
 │   ├── trace.mjs                 #   runtime observability (record / summarize)
+│   ├── diagnostics.mjs           #   run a command → structured errors (for the MCP probe)
 │   └── cli.mjs                   #   inherit + scaffold + eval + trace + CLI
 ├── hooks/
 │   ├── hooks.json                # PostToolUse(Failure) → observe.mjs
 │   └── observe.mjs               # passive trace logger (no-op outside gene projects)
-├── test/                         # 44 tests (node:test)
+├── mcp/
+│   └── server.mjs                # zero-dep MCP stdio server (diagnostics tool)
+├── test/                         # 55 tests (node:test)
 │   ├── fingerprint.test.mjs
 │   ├── manifest.test.mjs
 │   ├── foundation.test.mjs
@@ -144,6 +148,8 @@ geneprint/
 │   ├── scaffold.test.mjs
 │   ├── eval.test.mjs
 │   ├── trace.test.mjs
+│   ├── diagnostics.test.mjs
+│   ├── mcp-server.test.mjs
 │   └── acceptance.test.mjs       #   end-to-end (spec §9)
 ├── docs/superpowers/
 │   ├── specs/                    # design spec
@@ -181,7 +187,7 @@ Requirements: **Node ≥ 18** and **git**.
 
 ```bash
 git clone https://github.com/lxb12123/geneprint && cd geneprint
-npm test          # 44/44 should pass
+npm test          # 55/55 should pass
 
 # Scaffold a blank conforming skill, fill it, then imprint into any project:
 node lib/cli.mjs scaffold /tmp/my-skill --name my-skill
@@ -199,7 +205,7 @@ The bundled golden skill **`/review`** demonstrates all five genes: a determinis
 
 ## Status & roadmap
 
-**Done & tested.** Idempotent `/inherit` engine, `scaffold` generator, the golden `/review` skill, host-native compilation (Claude / Cursor / AGENTS.md), a deterministic skill-**eval** harness (`/eval`), and passive **runtime observability** (`/trace`, a PostToolUse hook that no-ops outside gene projects), installable as a Claude Code plugin — **44 passing tests**.
+**Done & tested.** Idempotent `/inherit` engine, `scaffold` generator, the golden `/review` skill, host-native compilation (Claude / Cursor / AGENTS.md), a deterministic skill-**eval** harness (`/eval`), passive **runtime observability** (`/trace` hook), and a zero-dep **MCP diagnostics probe** (run build/test → structured errors for self-correction), installable as a Claude Code plugin — **55 passing tests**.
 
 | Phase | Adds | Status |
 |-------|------|--------|
@@ -207,7 +213,7 @@ The bundled golden skill **`/review`** demonstrates all five genes: a determinis
 | **B** | `/inherit` flow (interview → scaffold → fill → imprint) | ✅ |
 | **C** | installable plugin + host-native compile (Claude / Cursor / AGENTS.md) | ✅ |
 | **D** | skill-eval harness (`/eval`) + runtime observability (`/trace` hook) | ✅ · LLM-rubric grading next |
-| **E** | remaining primitives (mcp probes, subagents, permissions) + versioning / registry | planned |
+| **E** | MCP diagnostics probe (zero-dep stdio server, self-healing loop) | ✅ · subagents / permissions / versioning next |
 
 Design docs live in [`docs/superpowers/specs/`](docs/superpowers/specs/) and [`docs/superpowers/plans/`](docs/superpowers/plans/).
 
