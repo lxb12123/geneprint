@@ -7,4 +7,4 @@ version: "0.1.0"
 uses:
   mcp: []
   permissions: ["Bash(node *)"]   # /review 要跑 collect-diff.mjs
-  subagents: []
+  subagents: ["review-verifier"]
