@@ -1,28 +1,25 @@
 # Geneprint
 
-> **Make everything your AI coding agent builds inherit one proven architecture.**
-> `gene` + `blueprint` — one source pattern; every piece your agent grows conforms to it.
+> **Describe an idea — your AI coding agent builds it on a proven architecture, automatically.**
+> Geneprint sets up a best-practice project structure once; everything your agent generates afterward inherits it.
 
-Geneprint is a lightweight, agent-native plugin (Claude Code / Cursor / Copilot / Gemini …). You describe what you want; your AI agent builds it — and a single idempotent command **imprints a reusable "architecture gene" into the project so that whatever the agent grows is well-architected by birth**, then gets out of the way.
+You describe what you want; your AI agent builds it. Geneprint stamps a proven, reusable architecture into the project the first time you run it, so **whatever the agent grows from then on is well-structured by birth — and you own it.** One command. **Zero dependencies.** Works across Claude Code / Cursor / Copilot / Gemini.
+
+In platform-engineering terms it's an **agent-native [golden path](https://www.redhat.com/en/topics/platform-engineering/golden-paths)** (a.k.a. *paved road*): a proven, opinionated structure you build on — except instead of a whole team adopting it, your AI agent imprints it from a single idea.
 
 ---
 
-## Philosophy
+## What you get — the architecture your agent inherits
 
-Today's AI coding agents build fast but inconsistently — ad-hoc structure, throwaway prompts, no memory, locked to one IDE. The two common answers each have a cost:
+This is the "best structure" Geneprint imprints. Every skill or tool your agent grows is born with these traits — that's the entire point:
 
-- **Scaffolders** (`create-react-app`, cookiecutter) hand you a *dead* code directory. No governance, no inheritance.
-- **Heavyweight methodologies** make you *adopt their whole process* — roles, phases, ceremony — and live inside it.
+- ⚡ **Deterministic + LLM split.** Exact, repeatable work runs in `scripts/` (0 tokens); judgment lives in `prompt.md`. Faster, cheaper, and reproducible — not one giant brittle prompt.
+- 🌐 **Runs on every host.** One source compiles to the open `AGENTS.md` standard **plus** each host's native format (Claude `SKILL.md`, Cursor `.mdc`, project subagents). Never locked to one IDE.
+- 🪶 **Lean & self-contained.** Three-tier lazy loading (metadata → body → `reference/`) loads only what's needed, and the engine has **zero runtime dependencies** — pure Node, nothing to install.
+- 📦 **Yours & committable.** Config and memory are plain files in your repo (`GENE.md`, `.gene/`). No lock-in, no hidden state — the architecture becomes the project's own.
+- 🔍 **Self-describing & verifiable.** Each skill declares the tools/permissions it uses (compiled into real host config), and ships with built-in evals (`/eval`) and runtime tracing (`/trace`).
 
-**Geneprint takes a third path: heredity, not methodology.**
-
-- 🧬 **A gene, not a framework.** It imprints a small, opinionated *architecture gene* into your project. Whatever your agent grows afterward **inherits** that gene's traits.
-- 🪶 **Pure & light.** No persona cast, no multi-stage process, no learning curve. One command. **Zero runtime dependencies** — pure Node, nothing to install.
-- ♻️ **Strictly idempotent.** Run it any number of times — same inputs, same result, never clobbers your files.
-- 🚪 **Imprint-and-leave.** The gene becomes *the project's own*. Geneprint doesn't stay resident.
-- 🌐 **Stands on open standards.** Multi-host via the open `AGENTS.md` standard + each host's native format — not reinvented.
-
-> The value isn't a feature list (others have those). It's the **purity, form, and idempotency**: a clean architectural inheritance any agent can grow on, that you own the moment it lands.
+…and the command that imprints all this is **strictly idempotent** — run it any number of times, same result, **never clobbers your files** — then it **gets out of the way**.
 
 ---
 
@@ -172,6 +169,14 @@ node lib/cli.mjs inherit /path/to/project --name review --from gene/golden-skill
 ```
 
 To iterate on the plugin inside Claude Code: `claude --plugin-dir .` then `/reload-plugins`.
+
+---
+
+## Why — the philosophy
+
+The two usual ways to make agents build consistently each cost you something. **Scaffolders** (`create-react-app`, cookiecutter) hand you a *dead* directory — no governance, no inheritance. **Heavyweight methodologies** make you adopt their whole process — roles, phases, ceremony — and live inside it.
+
+Geneprint takes a third path — **heredity, not methodology.** It imprints a small, opinionated architecture gene, everything your agent grows inherits it, and then it leaves. The value isn't the feature list (others have those) — it's the **purity, form, and idempotency**: a clean architecture any agent can grow on, that you own the moment it lands.
 
 ---
 
