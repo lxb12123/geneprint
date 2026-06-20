@@ -1,0 +1,10 @@
+# gene/pr-description/skill.yaml
+name: pr-description
+description: 把本分支相对基线的提交与改动汇总成 PR 描述(确定性取 log/diffstat + LLM 综述)
+when-to-use: 开 Pull Request 前,需要根据本分支相对基线的提交生成标题/摘要/测试计划时
+version: "0.1.0"
+# 自描述原语(基因⑤)
+uses:
+  mcp: []
+  permissions: ["Bash(node *)"]   # /pr-description 要跑 collect-commits.mjs
+  subagents: []

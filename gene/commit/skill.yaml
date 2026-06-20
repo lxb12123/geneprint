@@ -1,0 +1,10 @@
+# gene/commit/skill.yaml
+name: commit
+description: 把已暂存的改动写成一条规范的提交信息(确定性取暂存区 + LLM 生成)
+when-to-use: 已 git add 暂存改动、准备提交、需要一条清晰的 Conventional Commits 信息时
+version: "0.1.0"
+# 自描述原语(基因⑤)
+uses:
+  mcp: []
+  permissions: ["Bash(node *)"]   # /commit 要跑 collect-staged.mjs
+  subagents: []
