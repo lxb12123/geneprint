@@ -1,5 +1,5 @@
 {
-  "$comment": "Geneprint distribution registry — bundled golden skills /inherit can resolve by name. source is relative to the plugin root.",
+  "$comment": "Agent Path Forge distribution registry — bundled golden skills /inherit can resolve by name. source is relative to the plugin root.",
   "skills": [
     {
       "name": "review",

@@ -34,7 +34,7 @@ test('追加到已有用户内容后,用空行隔开', () => {
 });
 
 test('B1: 文件仅在散文里提到 end 标记、无真实块 → 不无限增长', () => {
-  const prose = `# 我的项目\n\n说明:geneprint 用 ${E} 界定它的块。\n`;
+  const prose = `# 我的项目\n\n说明:agent-path-forge 用 ${E} 界定它的块。\n`;
   const r1 = upsertBlock(prose, S, E, 'rule body');
   const r2 = upsertBlock(r1, S, E, 'rule body');
   assert.equal(r2, r1);                         // 第二次起稳定,不漂移

@@ -1,11 +1,11 @@
 {
-  "name": "geneprint-marketplace",
+  "name": "agent-path-forge-marketplace",
   "owner": { "name": "lxb12123" },
   "plugins": [
     {
-      "name": "geneprint",
+      "name": "agent-path-forge",
       "source": "./",
-      "description": "Make everything your AI agent builds inherit one proven architecture — gene + blueprint.",
+      "description": "From one idea, your AI agent builds a skill / command / MCP tool / hook / whole plugin on a flawless, reusable architecture it inherits. An agent-native golden path; zero-dependency.",
       "version": "0.1.0"
     }
   ]

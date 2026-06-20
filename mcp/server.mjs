@@ -33,7 +33,7 @@ export function handleMessage(msg) {
       result: {
         protocolVersion: PROTOCOL_VERSION,
         capabilities: { tools: {} },
-        serverInfo: { name: 'geneprint-diagnostics', version: '0.1.0' },
+        serverInfo: { name: 'agent-path-forge-diagnostics', version: '0.1.0' },
       },
     };
   }
@@ -76,7 +76,7 @@ if (isMain()) {
       let msg;
       try { msg = JSON.parse(line); } catch { continue; } // 忽略坏行
       let res = null;
-      try { res = handleMessage(msg); } catch (e) { process.stderr.write(`geneprint-mcp error: ${e}\n`); }
+      try { res = handleMessage(msg); } catch (e) { process.stderr.write(`agent-path-forge-mcp error: ${e}\n`); }
       if (res) process.stdout.write(`${JSON.stringify(res)}\n`);
     }
   });

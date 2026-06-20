@@ -1,17 +1,16 @@
-# Geneprint
+# Agent Path Forge
 
-> **Describe an idea — your AI coding agent builds it on a proven architecture, automatically.**
-> Geneprint sets up a best-practice project structure once; everything your agent generates afterward inherits it.
+> **Give it one idea, and your AI coding agent builds it out on a flawless, proven architecture.**
 
-You describe what you want; your AI agent builds it. Geneprint stamps a proven, reusable architecture into the project the first time you run it, so **whatever the agent grows from then on is well-structured by birth — and you own it.** One command. **Zero dependencies.** Works across Claude Code / Cursor / Copilot / Gemini.
+Agent Path Forge is a one-command, **zero-dependency** plugin for AI coding agents (Claude Code / Cursor / Copilot / Gemini). It turns that idea into a real, ready-to-use artifact — a **skill, slash-command, MCP tool, hook, subagent, rule, ignore-set, or a whole plugin** — already built on a flawless, reusable architecture that everything you grow afterward inherits. It's idempotent, never clobbers your files, and is yours to keep.
 
-In platform-engineering terms it's an **agent-native [golden path](https://www.redhat.com/en/topics/platform-engineering/golden-paths)** (a.k.a. *paved road*): a proven, opinionated structure you build on — except instead of a whole team adopting it, your AI agent imprints it from a single idea.
+It's an agent-native **[golden path](https://www.redhat.com/en/topics/platform-engineering/golden-paths)** (a.k.a. *paved road*): a proven, opinionated architecture you build on — except your AI agent imprints it from a single idea, not a whole team.
 
 ---
 
 ## What you get — the architecture your agent inherits
 
-This is the "best structure" Geneprint imprints. Every skill or tool your agent grows is born with these traits — that's the entire point:
+This is the "best structure" Agent Path Forge imprints. Every skill or tool your agent grows is born with these traits — that's the entire point:
 
 - ⚡ **Deterministic + LLM split.** Exact, repeatable work runs in `scripts/` (0 tokens); judgment lives in `prompt.md`. Faster, cheaper, and reproducible — not one giant brittle prompt.
 - 🌐 **Runs on every host.** One source compiles to the open `AGENTS.md` standard **plus** each host's native format (Claude `SKILL.md`, Cursor `.mdc`, project subagents). Never locked to one IDE.
@@ -81,7 +80,7 @@ Same inputs → identical tree. Re-runs never mutate existing files (content-fin
 │   └── subagents/       #   optional bundled subagent defs
 ├── rules/<name>.md      # rules-primitive source (description · globs · alwaysApply)
 ├── AGENTS.md            # compiled: open standard — Skills + Rules (Cursor / Copilot / Gemini)
-├── CLAUDE.md            # compiled: rules → geneprint-managed block (Claude native)
+├── CLAUDE.md            # compiled: rules → agent-path-forge-managed block (Claude native)
 ├── .claude/skills/<name>/SKILL.md   # compiled: Claude native (+ allowed-tools from uses.permissions)
 ├── .claude/agents/<name>.md         # compiled: Claude project subagents
 ├── .cursor/rules/<name>.mdc         # compiled: Cursor native (skills + rules)
@@ -89,14 +88,14 @@ Same inputs → identical tree. Re-runs never mutate existing files (content-fin
 └── GENE.md              # committable config / architecture decisions
 ```
 
-**The Geneprint plugin itself** (this repo):
+**The Agent Path Forge plugin itself** (this repo):
 
 ```
-geneprint/
+agent-path-forge/
 ├── .claude-plugin/
 │   ├── plugin.json               # Claude Code plugin manifest
 │   └── marketplace.json          # self-marketplace (installable from this repo)
-├── .mcp.json                     # declares the geneprint-diagnostics MCP server
+├── .mcp.json                     # declares the agent-path-forge-diagnostics MCP server
 ├── registry.json                 # distribution registry — golden skills resolvable by name
 ├── .github/workflows/ci.yml      # CI — node --test on push / PR
 ├── commands/
@@ -117,7 +116,7 @@ geneprint/
 │   ├── compiler.mjs              #   → AGENTS.md + .claude/{skills,agents} + .cursor/rules (+ rules, ignore)
 │   ├── rules.mjs                 #   rules primitive → Cursor .mdc + AGENTS.md + CLAUDE.md block
 │   ├── ignore.mjs                #   ignore primitive → .gitignore/.cursorignore/.geminiignore block
-│   ├── managed-block.mjs         #   idempotent geneprint-managed block in shared host files
+│   ├── managed-block.mjs         #   idempotent agent-path-forge-managed block in shared host files
 │   ├── scaffold.mjs              #   blank gene-conforming skill skeleton
 │   ├── eval.mjs                  #   load / grade / summarize eval cases
 │   ├── trace.mjs                 #   runtime observability (record / summarize)
@@ -142,16 +141,16 @@ geneprint/
 ### As a Claude Code plugin (recommended)
 
 ```text
-/plugin marketplace add lxb12123/geneprint
-/plugin install geneprint@geneprint-marketplace
+/plugin marketplace add lxb12123/agent-path-forge
+/plugin install agent-path-forge@agent-path-forge-marketplace
 ```
 
 Then, in any project:
 
 ```text
-/geneprint:inherit          # describe a skill → it's imprinted + compiled to every host
-/geneprint:eval skills/<n>  # grade a skill against its eval cases
-/geneprint:trace .          # runtime observability summary
+/agent-path-forge:inherit          # describe a skill → it's imprinted + compiled to every host
+/agent-path-forge:eval skills/<n>  # grade a skill against its eval cases
+/agent-path-forge:trace .          # runtime observability summary
 ```
 
 Claude interviews you, scaffolds a gene-conforming skill, and imprints it (`.gene/`, `skills/<name>/`, host outputs). Re-run any time — it never clobbers existing files. It has **zero dependencies**, so there's nothing to install.
@@ -161,7 +160,7 @@ Claude interviews you, scaffolds a gene-conforming skill, and imprints it (`.gen
 Requirements: **Node ≥ 18** and **git**.
 
 ```bash
-git clone https://github.com/lxb12123/geneprint && cd geneprint
+git clone https://github.com/lxb12123/agent-path-forge && cd agent-path-forge
 npm test          # 111/111 should pass (no install needed — zero deps)
 
 # Imprint the bundled golden /review skill into any project:
@@ -176,7 +175,7 @@ To iterate on the plugin inside Claude Code: `claude --plugin-dir .` then `/relo
 
 The two usual ways to make agents build consistently each cost you something. **Scaffolders** (`create-react-app`, cookiecutter) hand you a *dead* directory — no governance, no inheritance. **Heavyweight methodologies** make you adopt their whole process — roles, phases, ceremony — and live inside it.
 
-Geneprint takes a third path — **heredity, not methodology.** It imprints a small, opinionated architecture gene, everything your agent grows inherits it, and then it leaves. The value isn't the feature list (others have those) — it's the **purity, form, and idempotency**: a clean architecture any agent can grow on, that you own the moment it lands.
+Agent Path Forge takes a third path — **heredity, not methodology.** It imprints a small, opinionated architecture gene, everything your agent grows inherits it, and then it leaves. The value isn't the feature list (others have those) — it's the **purity, form, and idempotency**: a clean architecture any agent can grow on, that you own the moment it lands.
 
 ---
 

@@ -1,4 +1,4 @@
-# Geneprint · 基因插件 设计文档(Design Spec)
+# Agent Path Forge · 基因插件 设计文档(Design Spec)
 
 > 状态:草案 v1 · 日期:2026-06-19 · 待用户评审
 > 标记约定:🟢 = v0.1 先做(核心) · 🔵 = 完整愿景(已纳入架构,分阶段做)
@@ -124,7 +124,7 @@ skill(能力原子)
 
 ### 7.3 母体插件本身(我们要发布的东西)
 ```
-geneprint/                 # 插件根目录
+agent-path-forge/                 # 插件根目录
 ├── commands/
 │   ├── inherit.md       🟢 /inherit:幂等自举元命令
 │   └── (其他命令)        🔵
@@ -171,7 +171,7 @@ geneprint/                 # 插件根目录
 
 1. **元命令名** = `/inherit`(备选 `/skill`)。
 2. **v0.1 黄金技能** = `/review`(代码审查;理由:天然同时用确定性脚本 + LLM 语义,一次证明 5 基因)。
-3. **产品/插件正式名** = `Geneprint`(gene + blueprint,已定名)。
+3. **产品/插件正式名** = `Agent Path Forge`(gene + blueprint,已定名)。
 4. **基因④**:v0.1 只做配置 `GENE.md`,记忆 `MEMORY.md` 推迟。
 5. **多宿主**:v0.1 只产 `AGENTS.md` 一份,宿主特化推迟。
 6. **黄金技能与技术栈**:基因与技术栈无关;`/review` 作用于任意 git 仓库,不绑 React/Vite(原 React/Vite 锚点撤销)。

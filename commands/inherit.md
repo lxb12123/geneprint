@@ -7,7 +7,7 @@ allowed-tools: Bash(node *)
 
 # /inherit — 长出一个基因合规技能
 
-你的任务:在**当前项目**里,用 Geneprint 的确定性引擎,幂等地刻地基并长出用户想要的技能。引擎在 `${CLAUDE_PLUGIN_ROOT}/lib/cli.mjs`。**不要**手工创建 `.gene/` 或编辑 `AGENTS.md`——这些由引擎完成,保证幂等。
+你的任务:在**当前项目**里,用 Agent Path Forge 的确定性引擎,幂等地刻地基并长出用户想要的技能。引擎在 `${CLAUDE_PLUGIN_ROOT}/lib/cli.mjs`。**不要**手工创建 `.gene/` 或编辑 `AGENTS.md`——这些由引擎完成,保证幂等。
 
 ## 流程
 

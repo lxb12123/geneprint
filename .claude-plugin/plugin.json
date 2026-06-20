@@ -1,9 +1,9 @@
 {
-  "name": "geneprint",
-  "description": "Make everything your AI agent builds inherit one proven architecture — gene + blueprint. Imprint a reusable architecture gene into any project and grow gene-conforming skills with one idempotent command.",
+  "name": "agent-path-forge",
+  "description": "Give it one idea and your AI coding agent builds it into a real artifact — skill, command, MCP tool, hook, or a whole plugin — on a flawless, reusable architecture that everything it grows inherits. An agent-native golden path: one idempotent command, zero dependencies, multi-host.",
   "version": "0.1.0",
-  "author": { "name": "Geneprint authors" },
-  "homepage": "https://github.com/lxb12123/geneprint",
-  "repository": "https://github.com/lxb12123/geneprint",
+  "author": { "name": "Agent Path Forge authors" },
+  "homepage": "https://github.com/lxb12123/agent-path-forge",
+  "repository": "https://github.com/lxb12123/agent-path-forge",
   "license": "MIT"
 }

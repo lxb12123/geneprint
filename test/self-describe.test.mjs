@@ -36,7 +36,7 @@ test('renderClaudeSkill: 无 permissions 不加 allowed-tools', () => {
 });
 
 test('renderAgentsMd: 非空 uses 被列为依赖', () => {
-  const md = renderAgentsMd([{ name: 'review', description: 'd', whenToUse: 'w', uses: { permissions: ['Bash(node *)'], mcp: ['geneprint-diagnostics'], subagents: [] } }]);
-  assert.match(md, /geneprint-diagnostics/);
+  const md = renderAgentsMd([{ name: 'review', description: 'd', whenToUse: 'w', uses: { permissions: ['Bash(node *)'], mcp: ['agent-path-forge-diagnostics'], subagents: [] } }]);
+  assert.match(md, /agent-path-forge-diagnostics/);
   assert.match(md, /Bash\(node \*\)/);
 });
