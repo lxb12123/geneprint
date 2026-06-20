@@ -21,6 +21,13 @@
       "version": "0.1.0",
       "source": "gene/pr-description",
       "dependencies": []
+    },
+    {
+      "name": "skill-design",
+      "description": "把一个想法设计成基因合规的技能(流程/方法论型,无确定性脚本)",
+      "version": "0.1.0",
+      "source": "gene/skill-design",
+      "dependencies": []
     }
   ]
 }

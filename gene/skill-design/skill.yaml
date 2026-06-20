@@ -1,0 +1,10 @@
+# gene/skill-design/skill.yaml
+name: skill-design
+description: 把一个想法设计成基因合规的技能(流程/方法论型,无确定性脚本)
+when-to-use: 要新增一个技能、但还没想清楚"哪部分确定、哪部分交给 LLM、如何验收"时
+version: "0.1.0"
+# 流程型技能:不带确定性脚本,价值在清单 + 流程 + 红旗(对照 Superpowers 的方法论技能形态)
+uses:
+  mcp: []
+  permissions: []
+  subagents: []

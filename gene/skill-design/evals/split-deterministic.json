@@ -1,0 +1,7 @@
+{
+  "name": "split-deterministic",
+  "input": "我想要一个技能:看当前测试有没有挂,挂了就把失败摘要讲清楚并建议怎么修。",
+  "expect": {
+    "rubric": "设计把这件事切成两层:确定性部分(跑测试命令、解析 pass/fail 与失败用例)归到 scripts/、0 token;判断部分(解读失败、给修复建议)归到 prompt.md;在 skill.yaml 的 uses.permissions 里声明跑命令所需的权限;并给出至少一个带 rubric 的 happy-path 验收用例。不应让 LLM 自己去'跑测试/数失败数'。"
+  }
+}

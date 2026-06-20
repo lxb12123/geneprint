@@ -37,6 +37,23 @@ This is the "best structure" Agent Path Forge imprints. Every skill or tool your
 
 Same inputs → identical tree. Re-runs never mutate existing files (content-fingerprint + manifest check).
 
+### Ship it as a plugin: `pack`
+
+Grow skills with `/inherit`, then turn the project into an **installable, multi-host plugin**:
+
+```
+node lib/cli.mjs pack /path/to/project     # or: /inherit … --target plugin (one step)
+   │
+   ├─ .claude-plugin/plugin.json + marketplace.json   → /plugin install-able
+   ├─ skills/<name>/SKILL.md                            → skills at the PLUGIN ROOT (Claude reads here)
+   ├─ agents/<skill>-<file>.md                          → bundled subagents
+   ├─ commands/<name>.md                                → a slash-command entry per skill
+   ├─ AGENTS.md + .cursor/rules/                         → still cross-host
+   └─ README.md (created if absent) · .mcp.json / hooks/hooks.json (only if a .gene source exists)
+```
+
+Plugin metadata comes from a `plugin` object in `.gene/gene.json` (name · description · version · author · license); absent fields fall back to sensible defaults. `pack` is idempotent — mirror artifacts are regenerated, your hand-written `README.md` is never clobbered. The result is a real plugin you can `/plugin install` — the same shape as Superpowers.
+
 ### Companion commands & capabilities
 
 - **`/eval`** — grade a skill against its `evals/` cases: deterministic assertions (contains / regex) **plus** optional LLM-rubric judging.
@@ -105,8 +122,9 @@ agent-path-forge/
 ├── gene/                         # bundled golden skills (registry sources) — DNA seeds /inherit replicates
 │   ├── golden-skill/             #   /review — diff → LLM review (+ review-verifier subagent)
 │   ├── commit/                   #   /commit — staged diff → Conventional Commits message
-│   └── pr-description/           #   /pr-description — branch commits → PR description
-│                                 #   each: skill.yaml · prompt.md · scripts/ · reference/ · evals/
+│   ├── pr-description/           #   /pr-description — branch commits → PR description
+│   │                             #   (above: deterministic-gather + LLM — skill.yaml · prompt.md · scripts/ · reference/ · evals/)
+│   └── skill-design/             #   /skill-design — process/methodology skill (checklist + flow + red-flags, NO script)
 ├── lib/                          # deterministic engine (Node ESM; ZERO dependencies)
 │   ├── fingerprint.mjs           #   content fingerprint (idempotency)
 │   ├── yaml-lite.mjs             #   tiny built-in YAML reader/writer (replaces js-yaml)
@@ -122,13 +140,14 @@ agent-path-forge/
 │   ├── trace.mjs                 #   runtime observability (record / summarize)
 │   ├── diagnostics.mjs           #   run a command → structured errors (MCP probe)
 │   ├── registry.mjs              #   skill version/deps + distribution registry (resolve by name)
-│   └── cli.mjs                   #   inherit / scaffold / eval / trace / list + CLI
+│   ├── plugin-target.mjs         #   "plugin target" compile → installable multi-host plugin (pack)
+│   └── cli.mjs                   #   inherit / pack / scaffold / eval / trace / list + CLI
 ├── hooks/
 │   ├── hooks.json                # PostToolUse(Failure) → observe.mjs
 │   └── observe.mjs               # passive trace logger (no-op outside gene projects)
 ├── mcp/
 │   └── server.mjs                # zero-dep MCP stdio server (diagnostics tool)
-├── test/                         # 111 tests (node:test), 24 files
+├── test/                         # 120 tests (node:test), 25 files
 ├── docs/superpowers/{specs,plans}/   # design spec + implementation plan
 ├── package.json                  # no dependencies — nothing to install
 └── README.md · LICENSE · .gitignore
@@ -161,7 +180,7 @@ Requirements: **Node ≥ 18** and **git**.
 
 ```bash
 git clone https://github.com/lxb12123/agent-path-forge && cd agent-path-forge
-npm test          # 111/111 should pass (no install needed — zero deps)
+npm test          # 120/120 should pass (no install needed — zero deps)
 
 # Imprint the bundled golden /review skill into any project:
 node lib/cli.mjs inherit /path/to/project --name review --from gene/golden-skill
