@@ -53,7 +53,11 @@ for (const name of ['commit', 'pr-description']) {
     assert.ok(readdirSync(join(dir, 'scripts')).some((f) => f.endsWith('.mjs')), 'has a script');
     const evals = readdirSync(join(dir, 'evals')).filter((f) => f.endsWith('.json'));
     assert.ok(evals.length, 'has eval cases');
-    for (const e of evals) JSON.parse(readFileSync(join(dir, 'evals', e), 'utf8'));  // 合法 JSON
+    const cases = evals.map((e) => JSON.parse(readFileSync(join(dir, 'evals', e), 'utf8')));  // 合法 JSON
+    assert.ok(
+      cases.some((c) => c.expect && typeof c.expect.rubric === 'string' && c.expect.rubric),
+      'has a happy-path rubric eval (not only the empty-case assertion)',
+    );
   });
 }
 

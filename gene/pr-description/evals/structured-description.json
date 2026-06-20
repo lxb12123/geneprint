@@ -1,0 +1,8 @@
+{
+  "name": "structured-description",
+  "input": "本分支相对 main 有 3 个提交:feat 登录、fix 登录校验空指针、docs 更新 README;diffstat 显示 4 个文件改动",
+  "expect": {
+    "matches": ["## Summary", "## Test Plan"],
+    "rubric": "PR 描述包含:一句话标题、## Summary(2-4 条说清改了什么与为什么)、## Test Plan(可勾选验证步骤);只综述给定的提交与改动,不臆造未发生的变更。"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "feat-message",
+  "input": "暂存区新增用户登录功能:新文件 src/auth/login.ts,实现登录表单与输入校验",
+  "expect": {
+    "matches": ["(feat|fix|docs|refactor|test|chore|perf|style)(\\(.+?\\))?: "],
+    "rubric": "输出是一条 Conventional Commits 提交信息:标题为 <type>(scope): <祈使句>、≤72 字符、type 与改动相符(此处应为 feat);只描述这一个逻辑改动、不逐行复述 diff;并给出可执行的 git commit 命令。"
+  }
+}
