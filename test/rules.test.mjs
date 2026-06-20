@@ -31,7 +31,7 @@ test('listRules 解析 frontmatter:globs 字符串→数组, alwaysApply 默认 
 
 test('renderCursorRuleFromRule:有 globs → alwaysApply:false;无 globs → 始终', () => {
   const withGlobs = renderCursorRuleFromRule({ name: 'x', description: 'd', globs: ['*.ts'], alwaysApply: true, body: 'B' });
-  assert.match(withGlobs, /globs: '?\*\.ts'?/);
+  assert.match(withGlobs, /globs: ["']?\*\.ts["']?/);
   assert.match(withGlobs, /alwaysApply: false/);
   const always = renderCursorRuleFromRule({ name: 'y', description: 'd', globs: [], alwaysApply: true, body: 'B' });
   assert.match(always, /alwaysApply: true/);

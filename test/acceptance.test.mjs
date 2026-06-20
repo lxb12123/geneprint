@@ -16,7 +16,7 @@ test('§9.1 空目录 inherit → 地基 + 技能 + AGENTS.md', () => {
   const d = tmp();
   const r = inherit(d, { name: 'review', from: GOLDEN });
   assert.equal(r.stamped, true);
-  assert.equal(existsSync(join(d, '.gene', 'gene.yaml')), true);
+  assert.equal(existsSync(join(d, '.gene', 'gene.json')), true);
   assert.equal(existsSync(join(d, 'skills', 'review', 'prompt.md')), true);
   assert.match(readFileSync(join(d, 'AGENTS.md'), 'utf8'), /### review/);
   rmSync(d, { recursive: true, force: true });

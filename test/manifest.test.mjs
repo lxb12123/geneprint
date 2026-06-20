@@ -37,10 +37,10 @@ test('upsertSkill 新增并按名排序, 同名覆盖', () => {
   assert.equal(m.skills.length, 2);                    // 不重复
 });
 
-test('readManifest 规范化空 gene.yaml 为合法清单', () => {
+test('readManifest 规范化空 gene.json 为合法清单', () => {
   const d = tmp();
   mkdirSync(join(d, '.gene'), { recursive: true });
-  writeFileSync(join(d, '.gene', 'gene.yaml'), '', 'utf8');   // 空文件
+  writeFileSync(join(d, '.gene', 'gene.json'), '', 'utf8');   // 空文件
   const m = readManifest(d);
   assert.equal(m.geneVersion, GENE_VERSION);
   assert.deepEqual(m.skills, []);

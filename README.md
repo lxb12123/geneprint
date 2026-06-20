@@ -17,7 +17,7 @@ Today's AI coding agents build fast but inconsistently — ad-hoc structure, thr
 **Geneprint takes a third path: heredity, not methodology.**
 
 - 🧬 **A gene, not a framework.** It imprints a small, opinionated *architecture gene* into your project. Whatever your agent grows afterward **inherits** that gene's traits.
-- 🪶 **Pure & light.** No persona cast, no multi-stage process, no learning curve. One command. (One runtime dep: `js-yaml`, bundled.)
+- 🪶 **Pure & light.** No persona cast, no multi-stage process, no learning curve. One command. **Zero runtime dependencies** — pure Node, nothing to install.
 - ♻️ **Strictly idempotent.** Run it any number of times — same inputs, same result, never clobbers your files.
 - 🚪 **Imprint-and-leave.** The gene becomes *the project's own*. Geneprint doesn't stay resident.
 - 🌐 **Stands on open standards.** Multi-host via the open `AGENTS.md` standard + each host's native format — not reinvented.
@@ -35,7 +35,7 @@ Today's AI coding agents build fast but inconsistently — ad-hoc structure, thr
    │
    ├─ gene foundation present?  no → stamp it (.gene/, GENE.md, skills/)   yes → skip
    ├─ scaffold a blank gene-conforming skill → agent fills it in
-   ├─ install it (fingerprint-idempotent) + record version in .gene/gene.yaml
+   ├─ install it (fingerprint-idempotent) + record version in .gene/gene.json
    └─ recompile host outputs (AGENTS.md · .claude/skills · .claude/agents · .cursor/rules · rules · ignore)
 ```
 
@@ -71,7 +71,7 @@ Same inputs → identical tree. Re-runs never mutate existing files (content-fin
 ```
 <your-project>/
 ├── .gene/
-│   ├── gene.yaml        # gene version + product manifest (name · fingerprint · version)
+│   ├── gene.json        # gene version + product manifest (name · fingerprint · version)
 │   ├── ignore           # ignore-primitive source (one glob per line)
 │   ├── trace.jsonl      # runtime observability log (local; git-ignored)
 │   └── .gitignore       # ignores trace.jsonl
@@ -111,9 +111,10 @@ geneprint/
 │   ├── commit/                   #   /commit — staged diff → Conventional Commits message
 │   └── pr-description/           #   /pr-description — branch commits → PR description
 │                                 #   each: skill.yaml · prompt.md · scripts/ · reference/ · evals/
-├── lib/                          # deterministic engine (Node ESM; only dep: js-yaml)
+├── lib/                          # deterministic engine (Node ESM; ZERO dependencies)
 │   ├── fingerprint.mjs           #   content fingerprint (idempotency)
-│   ├── manifest.mjs              #   .gene/gene.yaml read/write + versions
+│   ├── yaml-lite.mjs             #   tiny built-in YAML reader/writer (replaces js-yaml)
+│   ├── manifest.mjs              #   .gene/gene.json read/write + versions
 │   ├── foundation.mjs            #   idempotent foundation stamping
 │   ├── skill-install.mjs         #   fingerprint-idempotent install
 │   ├── compiler.mjs              #   → AGENTS.md + .claude/{skills,agents} + .cursor/rules (+ rules, ignore)
@@ -131,10 +132,9 @@ geneprint/
 │   └── observe.mjs               # passive trace logger (no-op outside gene projects)
 ├── mcp/
 │   └── server.mjs                # zero-dep MCP stdio server (diagnostics tool)
-├── test/                         # 100 tests (node:test), 23 files
+├── test/                         # 111 tests (node:test), 24 files
 ├── docs/superpowers/{specs,plans}/   # design spec + implementation plan
-├── node_modules/                 # bundled (js-yaml) — zero-setup install
-├── package.json · package-lock.json
+├── package.json                  # no dependencies — nothing to install
 └── README.md · LICENSE · .gitignore
 ```
 
@@ -157,7 +157,7 @@ Then, in any project:
 /geneprint:trace .          # runtime observability summary
 ```
 
-Claude interviews you, scaffolds a gene-conforming skill, and imprints it (`.gene/`, `skills/<name>/`, host outputs). Re-run any time — it never clobbers existing files. Dependencies are bundled, so there's no setup step.
+Claude interviews you, scaffolds a gene-conforming skill, and imprints it (`.gene/`, `skills/<name>/`, host outputs). Re-run any time — it never clobbers existing files. It has **zero dependencies**, so there's nothing to install.
 
 ### From source / for development
 
@@ -165,7 +165,7 @@ Requirements: **Node ≥ 18** and **git**.
 
 ```bash
 git clone https://github.com/lxb12123/geneprint && cd geneprint
-npm test          # 100/100 should pass
+npm test          # 111/111 should pass (no install needed — zero deps)
 
 # Imprint the bundled golden /review skill into any project:
 node lib/cli.mjs inherit /path/to/project --name review --from gene/golden-skill

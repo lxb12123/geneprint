@@ -8,9 +8,6 @@
   "scripts": {
     "test": "node --test"
   },
-  "dependencies": {
-    "js-yaml": "^4.1.0"
-  },
   "engines": { "node": ">=18" },
   "files": ["lib", "gene", "commands", "plugin.json"]
 }

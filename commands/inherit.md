@@ -32,7 +32,7 @@ allowed-tools: Bash(node *)
    ```bash
    node "${CLAUDE_PLUGIN_ROOT}/lib/cli.mjs" inherit . --name <name> --from "$TMP"
    ```
-   引擎:无地基则刻(`.gene/`、`GENE.md`、`skills/`)→ 指纹幂等装技能 → 更新 `.gene/gene.yaml` → 重编译 `AGENTS.md`。
+   引擎:无地基则刻(`.gene/`、`GENE.md`、`skills/`)→ 指纹幂等装技能 → 更新 `.gene/gene.json` → 重编译 `AGENTS.md`。
 
 5. **回报结果**:转述引擎输出的 JSON(`stamped` / `skill.changed` / `compiledSkills`);`skill.changed=false` 表示该技能已存在且未变化(幂等,未重复写)。
 

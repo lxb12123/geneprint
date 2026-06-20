@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, rmSync, existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import yaml from 'js-yaml';
+import { parseYaml } from '../lib/yaml-lite.mjs';
 import { scaffoldSkill } from '../lib/scaffold.mjs';
 import { inherit } from '../lib/cli.mjs';
 import { readManifest } from '../lib/manifest.mjs';
@@ -16,7 +16,7 @@ test('scaffoldSkill 生成合规骨架(skill.yaml 带 name + uses + when-to-use,
   scaffoldSkill(d, 'changelog');
   assert.equal(existsSync(join(d, 'skill.yaml')), true);
   assert.equal(existsSync(join(d, 'prompt.md')), true);
-  const meta = yaml.load(readFileSync(join(d, 'skill.yaml'), 'utf8'));
+  const meta = parseYaml(readFileSync(join(d, 'skill.yaml'), 'utf8'));
   assert.equal(meta.name, 'changelog');
   assert.ok('when-to-use' in meta);
   assert.ok(meta.uses && Array.isArray(meta.uses.mcp)

@@ -1,2 +1,4 @@
-# node_modules is intentionally committed so the plugin works on install
-# with zero setup (no separate `npm install` step). Only runtime dep: js-yaml.
+# Zero runtime dependencies — the engine ships pure Node + a tiny built-in
+# YAML reader (lib/yaml-lite.mjs), so there is nothing to install and nothing
+# to commit. node_modules (if a dev ever adds dev-deps) stays out of the repo.
+node_modules/
