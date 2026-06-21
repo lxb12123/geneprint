@@ -2,7 +2,7 @@
 
 > **Give it one idea, and your AI coding agent builds — and ships — a complete, installable plugin on a flawless, proven architecture.**
 
-Agent Path Forge is a **plugin factory** for AI coding agents. Describe an idea, and the agent grows it into a real, **installable, multi-host plugin** — the same shape as [Superpowers](https://github.com/obra/superpowers) — that you can `/plugin install` and run on Claude Code, Cursor, Copilot, or Gemini. One command produces the whole package: a [`plugin.json` + `marketplace.json`](https://docs.claude.com/en/docs/claude-code/plugins) manifest, skills, slash-commands, subagents, an MCP tool, hooks, rules, and its own README — all assembled on a flawless, reusable architecture that everything you grow afterward inherits.
+Agent Path Forge is a **plugin factory** for AI coding agents. Describe an idea, and the agent grows it into a real, **installable, multi-host plugin** that you can `/plugin install` and run on Claude Code, Cursor, Copilot, or Gemini. One command produces the whole package: a [`plugin.json` + `marketplace.json`](https://docs.claude.com/en/docs/claude-code/plugins) manifest, skills, slash-commands, subagents, an MCP tool, hooks, rules, and its own README — all assembled on a flawless, reusable architecture that everything you grow afterward inherits.
 
 It's a one-command, **zero-dependency** tool, idempotent (re-run any time, never clobbers your files), and the plugin it builds is yours to keep and publish.
 
@@ -55,7 +55,7 @@ node lib/cli.mjs pack /path/to/project     # or: /inherit … --target plugin (o
    └─ README.md (created if absent) · .mcp.json / hooks/hooks.json (only if a .gene source exists)
 ```
 
-Plugin metadata comes from a `plugin` object in `.gene/gene.json` (name · description · version · author · license); absent fields fall back to sensible defaults. `pack` is idempotent — mirror artifacts are regenerated, your hand-written `README.md` is never clobbered. The result is a real plugin you can `/plugin install` — the same shape as Superpowers.
+Plugin metadata comes from a `plugin` object in `.gene/gene.json` (name · description · version · author · license); absent fields fall back to sensible defaults. `pack` is idempotent — mirror artifacts are regenerated, your hand-written `README.md` is never clobbered. The result is a real plugin you can `/plugin install` and publish.
 
 ### Companion commands & capabilities
 
@@ -151,7 +151,7 @@ agent-path-forge/
 ├── mcp/
 │   └── server.mjs                # zero-dep MCP stdio server (diagnostics tool)
 ├── test/                         # 120 tests (node:test), 25 files
-├── docs/superpowers/{specs,plans}/   # design spec + implementation plan
+├── docs/design/{specs,plans}/        # design spec + implementation plan
 ├── package.json                  # no dependencies — nothing to install
 └── README.md · LICENSE · .gitignore
 ```

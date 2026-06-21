@@ -1,6 +1,6 @@
 # Meta-Harness v0.1 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** implement this plan task-by-task (one task at a time, review between tasks). Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 做出一个能用一条幂等命令 `/inherit` 把"基因地基"刻进任意项目、并长出一个基因合规技能(黄金技能 `/review`)、再编译出 `AGENTS.md` 的最小可用 Claude Code 插件。
 
@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node.js ≥18(ESM)· 测试用内置 `node:test` + `node:assert/strict`(`node --test`)· 唯一运行时依赖 `js-yaml` · git。
 
-**Spec:** `docs/superpowers/specs/2026-06-19-meta-harness-gene-plugin-design.md`(§9 为本计划验收基准)
+**Spec:** `docs/design/specs/2026-06-19-meta-harness-gene-plugin-design.md`(§9 为本计划验收基准)
 
 ---
 

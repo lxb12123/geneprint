@@ -5,7 +5,7 @@
     {
       "name": "agent-path-forge",
       "source": "./",
-      "description": "A plugin factory: from one idea, your AI agent builds — and ships — a complete, installable, multi-host plugin (Superpowers-shaped) on a proven golden-path architecture it inherits. One command, zero dependencies.",
+      "description": "A plugin factory: from one idea, your AI agent builds — and ships — a complete, installable, multi-host plugin on a proven golden-path architecture it inherits. One command, zero dependencies.",
       "version": "0.1.0"
     }
   ]
