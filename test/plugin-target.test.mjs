@@ -70,6 +70,14 @@ test('renderCommand 产出带 frontmatter 的命令,委托给同名技能', () =
   assert.match(cmd, /Use the \*\*review\*\* skill/);
 });
 
+test('renderCommand: 有 argumentHint 则写 argument-hint,无则不写(向后兼容)', () => {
+  const withHint = renderCommand({ name: 'eval', description: 'D', argumentHint: 'skills/<name>' });
+  assert.match(withHint, /argument-hint: skills\/<name>/);
+
+  const without = renderCommand({ name: 'trace', description: 'D' });
+  assert.doesNotMatch(without, /argument-hint/);
+});
+
 test('compilePlugin 幂等:再编译一次,镜像产物逐字节不变', () => {
   const d = tmp();
   inherit(d, { name: 'review', from: GOLDEN });
