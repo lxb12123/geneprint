@@ -1,6 +1,6 @@
 ---
 name: inherit
-description: 把基因地基刻进当前项目并长出一个基因合规技能(幂等)
+description: Imprint the gene foundation into this project and grow a gene-compliant skill (idempotent)
 allowed-tools: Bash(node *)
 ---
 

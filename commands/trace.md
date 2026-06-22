@@ -1,6 +1,6 @@
 ---
 name: trace
-description: 查看当前项目的运行时观测摘要(gene 技能与工具调用)
+description: Runtime observability summary for this project (gene skills & tool calls)
 allowed-tools: Bash(node *)
 ---
 
