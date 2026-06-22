@@ -50,12 +50,14 @@ node lib/cli.mjs pack /path/to/project     # or: /inherit … --target plugin (o
    ├─ .claude-plugin/plugin.json + marketplace.json   → /plugin install-able
    ├─ skills/<name>/SKILL.md                            → skills at the PLUGIN ROOT (Claude reads here)
    ├─ agents/<skill>-<file>.md                          → bundled subagents
-   ├─ commands/<name>.md                                → a slash-command entry per skill
+   ├─ commands/<name>.md                                → a slash-command entry per skill (optional argument-hint)
    ├─ AGENTS.md + .cursor/rules/                         → still cross-host
    └─ README.md (created if absent) · .mcp.json / hooks/hooks.json (only if a .gene source exists)
 ```
 
 Plugin metadata comes from a `plugin` object in `.gene/gene.json` (name · description · version · author · license); absent fields fall back to sensible defaults. `pack` is idempotent — mirror artifacts are regenerated, your hand-written `README.md` is never clobbered. The result is a real plugin you can `/plugin install` and publish.
+
+**Slash-command input hints.** Add an optional `argument-hint:` to a skill's `skill.yaml` and the generated Claude Code command shows it as a placeholder after you type the command and a space (e.g. `/eval ` → `skills/<name>`). It's host-neutral source — only the Claude command renderer consumes it; `AGENTS.md`, Cursor rules, and `SKILL.md` ignore it. Omit the field and nothing changes.
 
 ### Companion commands & capabilities
 
