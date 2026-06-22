@@ -50,7 +50,7 @@ node lib/cli.mjs pack /path/to/project     # or: /inherit … --target plugin (o
    ├─ .claude-plugin/plugin.json + marketplace.json   → /plugin install-able
    ├─ skills/<name>/SKILL.md                            → skills at the PLUGIN ROOT (Claude reads here)
    ├─ agents/<skill>-<file>.md                          → bundled subagents
-   ├─ commands/<name>.md                                → a slash-command entry per skill (optional argument-hint)
+   ├─ commands/<name>.md                                → a Claude slash-command per skill (optional argument-hint — Claude-only)
    ├─ AGENTS.md + .cursor/rules/                         → still cross-host
    └─ README.md (created if absent) · .mcp.json / hooks/hooks.json (only if a .gene source exists)
 ```
