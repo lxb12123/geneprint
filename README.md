@@ -21,7 +21,7 @@ This is the architecture Agent Path Forge imprints. Every skill or tool your age
 - ⚡ **Deterministic + LLM split.** Exact, repeatable work runs in `scripts/` (0 tokens); judgment lives in `prompt.md`. Faster, cheaper, and reproducible — not one giant brittle prompt.
 - 🌐 **Runs on every host.** One source compiles to the open `AGENTS.md` standard **plus** each host's native format (Claude `SKILL.md`, Cursor `.mdc`, project subagents). Never locked to one IDE.
 - 🪶 **Lean & self-contained.** Three-tier lazy loading (metadata → body → `reference/`) loads only what's needed, and the engine has **zero runtime dependencies** — pure Node, nothing to install.
-- 📦 **Yours & committable.** Config and memory are plain files in your repo (`GENE.md`, `.gene/`). No lock-in, no hidden state — the architecture becomes the project's own.
+- 📦 **Yours & committable.** Config and memory are plain files in your repo (`GENE.md`, `MEMORY.md`, `.gene/`). No lock-in, no hidden state — the architecture becomes the project's own.
 - 🔍 **Self-describing & verifiable.** Each skill declares the tools/permissions it uses (compiled into real host config), and ships with built-in evals (`/eval`) and runtime tracing (`/trace`).
 - 🚀 **Installable & shippable.** `pack` turns the project into a `/plugin install`-able plugin — manifest + plugin-root skills + commands + subagents + its own README — that you publish and others install. Not just files in your repo; a distributable product.
 
@@ -36,7 +36,7 @@ This is the architecture Agent Path Forge imprints. Every skill or tool your age
 ```
 /inherit  + an idea
    │
-   ├─ gene foundation present?  no → stamp it (.gene/, GENE.md, skills/)   yes → skip
+   ├─ gene foundation present?  no → stamp it (.gene/, GENE.md, MEMORY.md, skills/)   yes → skip
    ├─ scaffold a blank gene-conforming skill → agent fills it in
    ├─ install it (fingerprint-idempotent) + record version in .gene/gene.json
    └─ recompile host outputs (AGENTS.md · .claude/skills · .claude/agents · .cursor/rules · rules · ignore)
