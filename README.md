@@ -4,9 +4,9 @@
   <img src="docs/images/banner.svg" alt="Agent Path Forge — describe one idea, ship a whole installable multi-host plugin" width="100%">
 </p>
 
-> **Give it one idea, and your AI coding agent builds — and ships — a complete, installable plugin on a flawless, proven architecture.**
+> **Give it one idea, and your AI coding agent builds — and ships — a complete, installable plugin on a proven, reusable architecture.**
 
-Agent Path Forge is a **plugin factory** for AI coding agents. Describe an idea, and the agent grows it into a real, **installable, multi-host plugin** that you can `/plugin install` and run on Claude Code, Cursor, Copilot, or Gemini. One command produces the whole package: a [`plugin.json` + `marketplace.json`](https://docs.claude.com/en/docs/claude-code/plugins) manifest, skills, slash-commands, subagents, an MCP tool, hooks, rules, and its own README — all assembled on a flawless, reusable architecture that everything you grow afterward inherits.
+Agent Path Forge is a **plugin factory** for AI coding agents. Describe an idea, and the agent grows it into a real, **installable, multi-host plugin** that you can `/plugin install` and run on Claude Code, Codex, Cursor, Copilot, or Gemini. One command produces the whole package: a [`plugin.json` + `marketplace.json`](https://docs.claude.com/en/docs/claude-code/plugins) manifest, skills, slash-commands, subagents, an MCP tool, hooks, rules, and its own README — all assembled on a proven, reusable architecture that everything you grow afterward inherits.
 
 It's a one-command, **zero-dependency** tool, idempotent (re-run any time, never clobbers your files), and the plugin it builds is yours to keep and publish.
 
@@ -16,7 +16,7 @@ It works because it imprints an agent-native **[golden path](https://www.redhat.
 
 ## What you get — the architecture your agent inherits
 
-This is the "best structure" Agent Path Forge imprints. Every skill or tool your agent grows is born with these traits — that's the entire point:
+This is the architecture Agent Path Forge imprints. Every skill or tool your agent grows is born with these traits — that's the entire point:
 
 - ⚡ **Deterministic + LLM split.** Exact, repeatable work runs in `scripts/` (0 tokens); judgment lives in `prompt.md`. Faster, cheaper, and reproducible — not one giant brittle prompt.
 - 🌐 **Runs on every host.** One source compiles to the open `AGENTS.md` standard **plus** each host's native format (Claude `SKILL.md`, Cursor `.mdc`, project subagents). Never locked to one IDE.
@@ -105,7 +105,7 @@ Plugin metadata comes from a `plugin` object in `.gene/gene.json` (name · descr
 │   ├── evals/           #   eval cases (graded by /eval)
 │   └── subagents/       #   optional bundled subagent defs
 ├── rules/<name>.md      # rules-primitive source (description · globs · alwaysApply)
-├── AGENTS.md            # compiled: open standard — Skills + Rules (Cursor / Copilot / Gemini)
+├── AGENTS.md            # compiled: open standard — Skills + Rules (Codex / Cursor / Copilot / Gemini)
 ├── CLAUDE.md            # compiled: rules → agent-path-forge-managed block (Claude native)
 ├── .claude/skills/<name>/SKILL.md   # compiled: Claude native (+ allowed-tools from uses.permissions)
 ├── .claude/agents/<name>.md         # compiled: Claude project subagents
@@ -156,7 +156,7 @@ agent-path-forge/
 │   └── observe.mjs               # passive trace logger (no-op outside gene projects)
 ├── mcp/
 │   └── server.mjs                # zero-dep MCP stdio server (diagnostics tool)
-├── test/                         # 120 tests (node:test), 25 files
+├── test/                         # 130 tests (node:test), 26 files
 ├── docs/design/{specs,plans}/        # design spec + implementation plan
 ├── package.json                  # no dependencies — nothing to install
 └── README.md · LICENSE · .gitignore
@@ -176,9 +176,9 @@ agent-path-forge/
 Then, in any project:
 
 ```text
-/agent-path-forge:inherit          # describe a skill → it's imprinted + compiled to every host
-/agent-path-forge:eval skills/<n>  # grade a skill against its eval cases
-/agent-path-forge:trace .          # runtime observability summary
+/agent-path-forge:inherit             # describe a skill → it's imprinted + compiled to every host
+/agent-path-forge:eval skills/<name>  # grade a skill against its eval cases
+/agent-path-forge:trace .             # runtime observability summary
 ```
 
 Claude interviews you, scaffolds a gene-conforming skill, and imprints it (`.gene/`, `skills/<name>/`, host outputs). Re-run any time — it never clobbers existing files. It has **zero dependencies**, so there's nothing to install.
