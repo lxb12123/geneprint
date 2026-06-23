@@ -23,7 +23,7 @@ This is the architecture Agent Path Forge imprints. Every skill or tool your age
 - 🪶 **Lean & self-contained.** Three-tier lazy loading (metadata → body → `reference/`) loads only what's needed, and the engine has **zero runtime dependencies** — pure Node, nothing to install.
 - 📦 **Yours & committable.** Config and memory are plain files in your repo (`GENE.md`, `MEMORY.md`, `.gene/`). No lock-in, no hidden state — the architecture becomes the project's own.
 - 🔍 **Self-describing & verifiable.** Each skill declares the tools/permissions it uses (compiled into real host config), and ships with built-in evals (`/eval`) and runtime tracing (`/trace`).
-- 🚀 **Installable & shippable.** `pack` turns the project into a `/plugin install`-able plugin — manifest + plugin-root skills + commands + subagents + its own README — that you publish and others install. Not just files in your repo; a distributable product.
+- 🚀 **Installable & shippable.** `pack` turns the project into a `/plugin install`-able plugin — manifest + plugin-root skills + subagents + its own README (slash-commands opt-in) — that you publish and others install. Not just files in your repo; a distributable product.
 
 …and the command that imprints all this is **strictly idempotent** — run it any number of times, same result, **never clobbers your files** — then it **gets out of the way**.
 
@@ -54,7 +54,7 @@ node lib/cli.mjs pack /path/to/project     # or: /inherit … --target plugin (o
    ├─ .claude-plugin/plugin.json + marketplace.json   → /plugin install-able
    ├─ skills/<name>/SKILL.md                            → skills at the PLUGIN ROOT (Claude reads here)
    ├─ agents/<skill>-<file>.md                          → bundled subagents
-   ├─ commands/<name>.md                                → a Claude slash-command per skill (optional argument-hint — Claude-only)
+   ├─ commands/<name>.md                                → opt-in Claude slash-command per skill (plugin.commands:true; off by default — a skill is already a /<name> entry)
    ├─ AGENTS.md + .cursor/rules/                         → still cross-host
    └─ README.md (created if absent) · .mcp.json / hooks/hooks.json (only if a .gene source exists)
 ```

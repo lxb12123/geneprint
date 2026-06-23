@@ -13,7 +13,7 @@ import { writeManifest, readManifest, emptyManifest } from '../lib/manifest.mjs'
 const GOLDEN = resolve('gene/golden-skill');   // review: comes with a subagent
 function tmp() { return mkdtempSync(join(tmpdir(), 'mh-plugin-')); }
 
-test('pack compiles a gene project into an installable plugin: manifest + plugin-root skills + subagents + commands', () => {
+test('pack compiles a gene project into an installable plugin: manifest + plugin-root skills + subagents (commands off by default)', () => {
   const d = tmp();
   inherit(d, { name: 'review', from: GOLDEN });   // grow a skill (with the review-verifier subagent)
   const r = pack(d);
@@ -26,12 +26,25 @@ test('pack compiles a gene project into an installable plugin: manifest + plugin
   // subagents land at the plugin root agents/
   assert.equal(r.agents, 1);
   assert.equal(existsSync(join(d, 'agents', 'review-verifier.md')), true);
-  // one command per skill
-  assert.equal(existsSync(join(d, 'commands', 'review.md')), true);
+  // commands are OFF by default — the SKILL.md skill is already a /review entry, so a
+  // same-named command would just duplicate it
+  assert.equal(existsSync(join(d, 'commands', 'review.md')), false);
+  assert.equal(r.commands, 0);
   // cross-host + bundled README
   assert.equal(existsSync(join(d, 'AGENTS.md')), true);
   assert.equal(existsSync(join(d, 'README.md')), true);
   assert.equal(r.skills, 1);
+  rmSync(d, { recursive: true, force: true });
+});
+
+test('pack with plugin.commands=true opts into a slash command per skill', () => {
+  const d = tmp();
+  inherit(d, { name: 'review', from: GOLDEN });
+  const m = readManifest(d);
+  m.plugin = { commands: true };
+  writeManifest(d, m);
+  const r = pack(d);
+  assert.equal(existsSync(join(d, 'commands', 'review.md')), true);
   assert.equal(r.commands, 1);
   rmSync(d, { recursive: true, force: true });
 });
@@ -106,14 +119,12 @@ test('compilePlugin is idempotent: compiling again leaves the mirror artifacts b
     pj: snap('.claude-plugin/plugin.json'),
     mp: snap('.claude-plugin/marketplace.json'),
     skill: snap('skills/review/SKILL.md'),
-    cmd: snap('commands/review.md'),
     agents: snap('AGENTS.md'),
   };
   compilePlugin(d);
   assert.equal(snap('.claude-plugin/plugin.json'), before.pj);
   assert.equal(snap('.claude-plugin/marketplace.json'), before.mp);
   assert.equal(snap('skills/review/SKILL.md'), before.skill);
-  assert.equal(snap('commands/review.md'), before.cmd);
   assert.equal(snap('AGENTS.md'), before.agents);
   rmSync(d, { recursive: true, force: true });
 });
