@@ -2,7 +2,7 @@
   "name": "agent-path-forge",
   "description": "A plugin factory for AI coding agents: describe an idea and your agent builds — and ships — a complete, installable, multi-host plugin (skills, commands, subagents, MCP, hooks, manifest) on a proven golden-path architecture everything it grows inherits. One idempotent command, zero dependencies.",
   "version": "0.1.0",
-  "author": { "name": "Agent Path Forge authors" },
+  "author": { "name": "lxb12123" },
   "homepage": "https://github.com/lxb12123/agent-path-forge",
   "repository": "https://github.com/lxb12123/agent-path-forge",
   "license": "MIT"

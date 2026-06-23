@@ -231,4 +231,4 @@ Agent Path Forge takes a third path — **heredity, not methodology.** It imprin
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) © lxb12123
