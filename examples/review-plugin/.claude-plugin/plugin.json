@@ -1,0 +1,9 @@
+{
+  "name": "review-plugin",
+  "description": "review-plugin — an agent plugin forged by Agent Plugin Kit.",
+  "version": "0.1.0",
+  "author": {
+    "name": "review-plugin authors"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,10 @@
+# gene/golden-skill/skill.yaml
+name: review
+description: Review the current changes (deterministically read the diff + LLM review)
+when-to-use: Before committing or merging, when you need to review the correctness and quality of code changes
+version: "0.1.0"
+# Self-describing primitives (gene #5): declare the capabilities used → compiled into the allowed-tools of the .claude SKILL.md and the AGENTS.md dependencies
+uses:
+  mcp: []
+  permissions: ["Bash(node *)"]   # /review needs to run collect-diff.mjs
+  subagents: ["review-verifier"]

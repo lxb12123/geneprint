@@ -1,0 +1,5 @@
+{
+  "name": "no-changes",
+  "input": "the working tree has no changes relative to HEAD",
+  "expect": { "contains": ["no changes"] }
+}

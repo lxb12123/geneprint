@@ -1,0 +1,5 @@
+{
+  "name": "flags-null-deref",
+  "input": "the change adds `function getName(u){ return u.profile.name }` with no check on the possibly-null u / u.profile",
+  "expect": { "matches": ["blocker|warning|nit", "null|undefined"] }
+}

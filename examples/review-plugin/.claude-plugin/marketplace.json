@@ -1,0 +1,14 @@
+{
+  "name": "review-plugin-marketplace",
+  "owner": {
+    "name": "review-plugin authors"
+  },
+  "plugins": [
+    {
+      "name": "review-plugin",
+      "source": "./",
+      "description": "review-plugin — an agent plugin forged by Agent Plugin Kit.",
+      "version": "0.1.0"
+    }
+  ]
+}
